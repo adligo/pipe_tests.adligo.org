@@ -24,7 +24,7 @@ public class ExampleFilter implements Function<String, Integer> {
       System.out.println("hey " + i + " wasn't filtered");
       return i;
     });
-    Optional<Integer> i = p.get("123");
+    Optional<Integer> i = p.supply("123");
     System.out.println("and a PipeFuture can return, ie " + i.get() + "\n\n");
     p.supply("456");
   }

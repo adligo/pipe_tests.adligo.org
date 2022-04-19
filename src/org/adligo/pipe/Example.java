@@ -1,11 +1,8 @@
 package org.adligo.pipe;
 
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 import org.adligo.i_pipe.I_Consumer;
 
@@ -34,7 +31,7 @@ public class Example {
 //					}
 //				})
         .fork(stepTwo(), "two");
-    p.supply(List.of("123", "456", "789"));
+    p.accept(List.of("123", "456", "789"));
   }
 
   public Function<String, Integer> stepOne() {
@@ -46,13 +43,13 @@ public class Example {
 
   public Consumer<Integer> stepTwo() {
     // initialize these first
-    I_Consumer<Integer> p123 = new PipeCtx().newPipe(Integer.class, Integer.class, (i) -> {
+    I_Consumer<Integer> p123 = new PipeCtx().newPipe((Function<Integer,Integer>) (i) -> {
       return i++;
     }).then((i) -> {
       System.out.println("\t\tA it's now " + i);
     });
 
-    I_Consumer<Integer> p456 = new PipeCtx().newPipe(Integer.class, Integer.class, (i) -> {
+    I_Consumer<Integer> p456 = new PipeCtx().newPipe((Function<Integer,Integer>) (i) -> {
       return i * i++;
     }).then((i) -> {
       System.out.println("\t\tB it's now " + i);
@@ -64,11 +61,11 @@ public class Example {
       switch (ii) {
       case 123:
         System.out.println("\tDid A for 123");
-        p123.supply(ii);
+        p123.accept(ii);
         break;
       case 456:
         System.out.println("\tDid B for 456");
-        p456.supply(ii);
+        p456.accept(ii);
         break;
       default:
         System.out.println("\tDid default");

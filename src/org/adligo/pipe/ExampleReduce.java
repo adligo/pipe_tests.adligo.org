@@ -8,18 +8,18 @@ import org.adligo.i_pipe.I_Pipe;
 
 public class ExampleReduce implements Function<Integer, String> {
 
-	
-  public static void main(String [] args) {
-		new ExampleReduce();
-	}
-  
+  public static void main(String[] args) {
+    new ExampleReduce();
+  }
+
   public ExampleReduce() {
-  	I_Pipe<Integer, Double> p = new PipeCtx().newPipe(this)
-  		.map((s) -> {
-  			System.out.println("hey " + s + " wasn't filtered");
-  			return Double.parseDouble(s);
-  		}).reduce((Double) 0.0, (i,a) -> { return i + a; });
-  		
+    I_Pipe<Integer, Double> p = new PipeCtx().newPipe(this).map((s) -> {
+      System.out.println("hey " + s + " wasn't filtered");
+      return Double.parseDouble(s);
+    }).reduce((Double) 0.0, (i, a) -> {
+      return i + a;
+    });
+
 //  		.map(new Function<Double,Double>() {
 //  			double sum = 0.0;
 //  			
@@ -30,19 +30,18 @@ public class ExampleReduce implements Function<Integer, String> {
 //				}
 //  			
 //  		});
-  	
-  	List<Integer> list = List.of(1, 1, 2, 3, 4, 5, 55,  55, 55, 6, 7, 8, 99);
-		Optional<Double> d = p.get(list);
-		System.out.println("got result " + d.get());
-		
-		d = p.get(List.of(1, 1, 2));
-		System.out.println("got result 2 " + d.get());
+
+    List<Integer> list = List.of(1, 1, 2, 3, 4, 5, 55, 55, 55, 6, 7, 8, 99);
+    Optional<Double> d = p.supply(list);
+    System.out.println("got result " + d.get());
+
+    d = p.supply(List.of(1, 1, 2));
+    System.out.println("got result 2 " + d.get());
   }
 
-	@Override
-	public String apply(Integer s) {
-		return "" + s;
-	}
-  
-  
+  @Override
+  public String apply(Integer s) {
+    return "" + s;
+  }
+
 }

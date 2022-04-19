@@ -22,7 +22,7 @@ public class ExampleReturn implements Function<String, Integer> {
       System.out.println("yert rock :), ! " + i);
       return i;
     });
-    Optional<Integer> i = p.get("123");
+    Optional<Integer> i = p.supply("123");
     System.out.println("and a PipeFuture can return, ie " + i.get());
   }
 
