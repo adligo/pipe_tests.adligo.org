@@ -1,5 +1,6 @@
 package org.adligo.pipe;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -31,7 +32,11 @@ public class Example {
 //					}
 //				})
         .fork(stepTwo(), "two");
-    p.accept(List.of("123", "456", "789"));
+    ArrayList<String> list = new ArrayList<>();
+    list.add("123");
+    list.add("456");
+    list.add("789");
+    p.accept(list);
   }
 
   public Function<String, Integer> stepOne() {

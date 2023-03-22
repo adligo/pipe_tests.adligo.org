@@ -19,7 +19,7 @@ public class ExampleSet implements Function<Integer, String> {
       return i;
     }).set();
 
-    Optional<Set<String>> ssetOpt = p.supply(List.of(1, 1, 2, 3, 4, 5, 55, 55, 55, 6, 7, 8, 99));
+    Optional<Set<String>> ssetOpt = p.supply(ExampleList.listOf(1, 1, 2, 3, 4, 5, 55, 55, 55, 6, 7, 8, 99));
     for (String s : ssetOpt.get()) {
       System.out.println("hey you guys now in set form " + s);
     }

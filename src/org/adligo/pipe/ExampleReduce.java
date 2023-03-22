@@ -31,11 +31,11 @@ public class ExampleReduce implements Function<Integer, String> {
 //  			
 //  		});
 
-    List<Integer> list = List.of(1, 1, 2, 3, 4, 5, 55, 55, 55, 6, 7, 8, 99);
+    List<Integer> list = ExampleList.listOf(1, 1, 2, 3, 4, 5, 55, 55, 55, 6, 7, 8, 99);
     Optional<Double> d = p.supply(list);
     System.out.println("got result " + d.get());
 
-    d = p.supply(List.of(1, 1, 2));
+    d = p.supply(ExampleList.listOf(1, 1, 2));
     System.out.println("got result 2 " + d.get());
   }
 
